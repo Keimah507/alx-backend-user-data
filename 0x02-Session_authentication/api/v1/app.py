@@ -52,7 +52,7 @@ def forbidden(error) -> str:
 def before_request():
     """Filtering requests
     """
-    auth.current_user = request.current_user
+    request.current_user = auth.current_user(request)
     needs_auth = ['/api/v1/status/',
                   '/api/v1/unauthorized/',
                   '/api/v1/forbidden/',
@@ -65,8 +65,7 @@ def before_request():
         if not auth.current_user(request):
             abort(403)
         if auth.authorization_header(request) and auth.session_cookie(request):
-            return None
-        abort (401)
+            abort (401)
 
 
 if __name__ == "__main__":
