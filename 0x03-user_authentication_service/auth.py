@@ -22,8 +22,8 @@ def _generate_uuid() -> str:
 
 
 class Auth:
-     """Auth class to interact with the authentication database.
-     """
+    """Auth class to interact with the authentication database.
+    """
 
     def __init__(self):
         self._db = DB()
@@ -60,7 +60,7 @@ class Auth:
             return None
         else:
             session_id = generate_id()
-            self._db.update_user(user.id, session_id=session_id))
+            self._db.update_user(user.id, session_id=session_id)
         return session_id
 
     def get_user_from_session_id(self, session_id: str) -> str:
