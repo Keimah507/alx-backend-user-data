@@ -59,7 +59,7 @@ class Auth:
         except NoResultFound:
             return None
         else:
-            session_id = generate_id()
+            session_id = _generate_uuid()
             self._db.update_user(user.id, session_id=session_id)
         return session_id
 
@@ -89,7 +89,7 @@ class Auth:
         except NoResultFound:
             raise ValueError
         else:
-            token = generate_id()
+            token = _generate_uuid()
             self._db.update_user(reset_token=token)
         return token
 
