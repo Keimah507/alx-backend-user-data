@@ -34,7 +34,7 @@ class Auth:
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:
-            password = hash_password(password)
+            password = _hash_password(password)
             user = self._db.add_user(email, password)
             return user
         else:
