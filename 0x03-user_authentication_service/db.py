@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from typing import Tuple
 
-from user import Base
+from user import Base, User
 
 
 class DB:
@@ -33,7 +33,7 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str, hashed_password: str) -> User :
+    def add_user(self, email: str, hashed_password: str) -> User:
         """
         Saves a user to the database
         """
@@ -41,7 +41,7 @@ class DB:
             u_toadd = User(email=email, hashed_password=hashed_password)
             self._session.add(u_toadd)
             self._session.commit()
-            return user
+            return u_toadd
 
     def find_user_by(self, **kwargs) -> User:
         """returns the first row found in the users table as filtered by the
@@ -54,7 +54,6 @@ class DB:
             raise NoResultFound
         return user
 
-
     def update_user(self, user_id: int, **kwargs) -> None:
         """use find_user_by to locate the user to update, then will update the
         user’s attributes as passed in the method’s arguments then commit
@@ -64,5 +63,5 @@ class DB:
         for key, value in kwargs.items():
             if not hasattr(_id, key):
                 raise ValueError
-            settattr(_id, key, value)
-        self,_session.commit()
+            setattr(_id, key, value)
+        self._session.commit()

@@ -2,7 +2,8 @@
 """Integration Testing
 """
 import requests
-URL = 'https://localhost:5000'
+URL = 'http://localhost:5000'
+
 
 def register_user(email: str, password: str) -> None:
     """Test register user function
@@ -17,7 +18,7 @@ def log_in_wrong_password(email: str, password: str) -> None:
     """Test login function
     """
     data = {'email': email, 'password': password}
-    response = requests.post(f'{URL}/users', data=data)
+    response = requests.post(f'{URL}/sessions', data=data)
     assert response.status_code == 401, "Test Fail"
     print("Task validate: 'log_in_wrong_password'")
 
@@ -102,4 +103,3 @@ if __name__ == "__main__":
     reset_token = reset_password_token(EMAIL)
     update_password(EMAIL, reset_token, NEW_PASSWD)
     log_in(EMAIL, NEW_PASSWD)
-

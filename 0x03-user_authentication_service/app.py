@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Flask application
 """
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
-Auth = Auth()
+AUTH = Auth()
 app = Flask(__name__)
 
 
@@ -23,7 +23,7 @@ def users():
     password = request.form.get('password')
     try:
         AUTH.register_user(email, password)
-        return jsonify({"email"; email, "message": "user created"}), 200
+        return jsonify({"email": email, "message": "user created"}), 200
     except Exception:
         return jsonify({"message": "email already registered"}), 400
 
@@ -89,9 +89,9 @@ def update_password():
         AUTH.update_password(token, password)
     except exception:
         abort(403)
-    return jsonify("email": email, "message": "Password updated"}
+    return jsonify({"email": email, "message": "Password updated"})
 
 
 if __name__ == "__main__":
-    app.run(host="0,0,0,0', port="5000")
+    app.run(host="0.0.0.0", port="5000")
 
