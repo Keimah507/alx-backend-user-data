@@ -33,4 +33,3 @@ class Auth:
         """Current user method
         """
         return None
-
