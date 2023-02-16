@@ -68,7 +68,7 @@ def reset_password_token(email: str) -> str:
     """
     data = {"email": email}
     response = requests.post(f'{URL}/reset_password', data=data)
-    assert response.status_code = 200, "Test fail"
+    assert response.status_code == 200, "Test fail"
     print("Task validate: 'reset_password_token'")
     reset_token = response.json().get("reset_token")
     return reset_token
